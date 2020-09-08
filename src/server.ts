@@ -1,20 +1,18 @@
-import App from './app'
+import App from './app';
 
-import * as bodyParser from 'body-parser'
-import loggerMiddleware from './middleware/logger'
+import * as bodyParser from 'body-parser';
+import loggerMiddleware from './middleware/logger';
 
-import HomeController from './controllers/home.controller'
+import HomeController from './controllers/home.controller';
 
 const app = new App({
   port: 3000,
-  controllers: [
-    new HomeController(),
-  ],
+  controllers: [new HomeController()],
   middleWares: [
     bodyParser.json(),
     bodyParser.urlencoded({ extended: true }),
-    loggerMiddleware
-  ]
-})
+    loggerMiddleware,
+  ],
+});
 
-app.listen()
+app.listen();

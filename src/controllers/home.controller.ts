@@ -1,23 +1,22 @@
-import * as express from 'express'
-import { Request, Response } from 'express'
-import IControllerBase from 'interfaces/ControllerBase.interface'
+import * as express from 'express';
+import { Request, Response } from 'express';
+import IControllerBase from 'interfaces/ControllerBase.interface';
 
 class HomeController implements IControllerBase {
-  public path = '/'
-  public router = express.Router()
+  public path = '/';
+  public router = express.Router();
 
   constructor() {
-    this.initRoutes()
+    this.initRoutes();
   }
 
   public initRoutes() {
-    this.router.get('/', this.index)
+    this.router.get('/', this.index);
   }
 
   index = (req: Request, res: Response) => {
-
-    res.send('hello world')
-  }
+    res.send('hello world');
+  };
 }
 
-export default HomeController
+export default HomeController;
