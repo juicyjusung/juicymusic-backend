@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { Application } from 'express';
+import { dbConfig } from './models';
 
 class App {
   public app: Application;
@@ -8,6 +9,8 @@ class App {
   constructor(appInit: { port: number; middleWares: any; controllers: any }) {
     this.app = express();
     this.port = appInit.port;
+
+    dbConfig.sync();
 
     this.middlewares(appInit.middleWares);
     this.routes(appInit.controllers);

@@ -4,15 +4,17 @@ import * as bodyParser from 'body-parser';
 import logger from './middleware/logger';
 import cors from './middleware/cors';
 
-import HomeController from './controllers/home.controller';
 import * as dotenv from 'dotenv';
 dotenv.config(
   process.env.NODE_ENV === 'production'
     ? { path: `${__dirname}/../.env.prod` }
     : { path: `${__dirname}/../.env.dev` }
 );
+
+import HomeController from './controllers/home.controller';
+
 const app = new App({
-  port: parseInt(process.env.PORT, 10),
+  port: parseInt(process.env.PORT, 10) || 8000,
   controllers: [new HomeController()],
   middleWares: [
     bodyParser.json(),
