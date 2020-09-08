@@ -2,6 +2,7 @@ import App from './app';
 
 import * as bodyParser from 'body-parser';
 import logger from './middleware/logger';
+import cors from './middleware/cors';
 
 import HomeController from './controllers/home.controller';
 import * as dotenv from 'dotenv';
@@ -13,7 +14,12 @@ dotenv.config(
 const app = new App({
   port: parseInt(process.env.PORT, 10),
   controllers: [new HomeController()],
-  middleWares: [bodyParser.json(), bodyParser.urlencoded({ extended: true }), logger],
+  middleWares: [
+    bodyParser.json(),
+    bodyParser.urlencoded({ extended: true }),
+    logger,
+    cors,
+  ],
 });
 
 app.listen();
