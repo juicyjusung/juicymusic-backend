@@ -1,6 +1,6 @@
 import * as logger from 'morgan';
-const loggerMiddleware = logger(
+const morganMiddleware = logger(
   process.env.NODE_ENV === 'production' ? 'combined' : 'dev'
 );
 
-export default loggerMiddleware;
+export default morganMiddleware;

@@ -1,7 +1,7 @@
 import App from './app';
 
 import * as bodyParser from 'body-parser';
-import logger from './middleware/logger';
+import morgan from './middleware/morgan';
 import cors from './middleware/cors';
 
 import * as dotenv from 'dotenv';
@@ -19,7 +19,7 @@ const app = new App({
   middleWares: [
     bodyParser.json(),
     bodyParser.urlencoded({ extended: true }),
-    logger,
+    morgan,
     cors,
   ],
 });
