@@ -3,6 +3,7 @@ import App from './app';
 import * as bodyParser from 'body-parser';
 import morgan from './middleware/morgan';
 import cors from './middleware/cors';
+import session from './middleware/session';
 
 import * as dotenv from 'dotenv';
 dotenv.config(
@@ -21,6 +22,7 @@ const app = new App({
     bodyParser.urlencoded({ extended: true }),
     morgan,
     cors,
+    session,
   ],
 });
 
