@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import IControllerBase from 'interfaces/ControllerBase.interface';
 
 class HomeController implements IControllerBase {

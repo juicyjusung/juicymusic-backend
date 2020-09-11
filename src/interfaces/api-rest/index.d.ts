@@ -1,4 +1,8 @@
 import { BuildOptions, Model } from 'sequelize';
+
+/*************
+ *  User
+ **************/
 export interface UserAttributes {
   id?: number;
   userId: string;
@@ -10,16 +14,24 @@ export interface UserAttributes {
 export interface UserModel extends Model<UserAttributes>, UserAttributes {}
 export class User extends Model<UserModel, UserAttributes> {}
 export type UserStatic = typeof Model & {
-  new (values?: Record<strin, unknown>, options?: BuildOptions): UserModel;
+  new (values?: Record<string, unknown>, options?: BuildOptions): UserModel;
 };
-export interface SkillsAttributes {
-  id: number;
-  skill: string;
+
+/*************
+ *  Track
+ **************/
+export interface TrackAttributes {
+  title: string;
+  artist: string;
+  album: string;
+  albumArt?: string;
+  filePath: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
-export interface SkillsModel extends Model<SkillsAttributes>, SkillsAttributes {}
-export class Skills extends Model<SkillsModel, SkillsAttributes> {}
-export type SkillsStatic = typeof Model & {
-  new (values?: Record<strin, unknown>, options?: BuildOptions): SkillsModel;
+
+export interface TrackModel extends Model<TrackAttributes>, TrackAttributes {}
+export class Track extends Model<TrackModel, TrackAttributes> {}
+export type TrackStatic = typeof Model & {
+  new (values?: Record<string, unknown>, options?: BuildOptions): TrackModel;
 };

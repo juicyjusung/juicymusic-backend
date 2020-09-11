@@ -13,10 +13,12 @@ dotenv.config(
 );
 
 import HomeController from './controllers/home.controller';
+import UserController from './controllers/user.controller';
+import TrackController from './controllers/track.controller';
 
 const app = new App({
-  port: parseInt(process.env.PORT, 10) || 8000,
-  controllers: [new HomeController()],
+  port: parseInt(process.env.PORT, 10) || 3000,
+  controllers: [new HomeController(), new UserController(), new TrackController()],
   middleWares: [
     bodyParser.json(),
     bodyParser.urlencoded({ extended: true }),
