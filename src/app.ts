@@ -1,20 +1,28 @@
 import * as express from 'express';
 import { Application } from 'express';
 import { dbConfig } from './models';
+import * as passport from 'passport';
 
+import passportConfig from './auth/index';
 class App {
   public app: Application;
   public port: number;
 
   constructor(appInit: { port: number; middleWares: any; controllers: any }) {
-    this.app = express();
     this.port = appInit.port;
-
+    this.app = express();
+    passportConfig();
     dbConfig.sync();
 
     this.middlewares(appInit.middleWares);
+    this.passportMiddleware();
     this.routes(appInit.controllers);
     this.assets();
+  }
+
+  private passportMiddleware() {
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
   }
 
   private middlewares(middleWares: {
