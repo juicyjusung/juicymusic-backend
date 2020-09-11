@@ -1,7 +1,7 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import { UserStatic } from '../interfaces/api-rest';
 
-export function UserModel(sequelize: Sequelize): UserStatic {
+export function UserFactory(sequelize: Sequelize): UserStatic {
   return <UserStatic>sequelize.define(
     'users',
     {

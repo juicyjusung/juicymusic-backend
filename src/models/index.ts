@@ -1,9 +1,9 @@
 import * as sequelize from 'sequelize';
-import { UserModel } from './User';
+import { UserFactory } from './User';
 import { sequelizeConfig } from '../config/config';
+import { TrackFactory } from './Track';
 
 const { database, username, password } = sequelizeConfig;
-console.log(sequelizeConfig);
 
 export const dbConfig = new sequelize.Sequelize(
   database,
@@ -12,6 +12,8 @@ export const dbConfig = new sequelize.Sequelize(
   sequelizeConfig
 );
 // THIS ONES ARE THE ONES YOU NEED TO USE ON YOUR CONTROLLERS
-export const User = UserModel(dbConfig);
-
+export const User = UserFactory(dbConfig);
+export const Tracks = TrackFactory(dbConfig);
 // Skills.belongsToMany(User, { through: user_has_skills });
+Tracks.belongsTo(User);
+User.hasMany(Tracks);
