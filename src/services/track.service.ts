@@ -26,9 +26,19 @@ export const TrackServices = {
     }
   },
 
-  addTrack: async (track: TrackAttributes) => {
+  addTrack: async (
+    track: TrackAttributes,
+    file: Express.MulterS3.File,
+    image: Express.MulterS3.File,
+    id: number
+  ) => {
     try {
-      const tracks = await Tracks.findAll();
+      const tracks = await Tracks.create({
+        ...track,
+        filePath: file.location,
+        albumArtPath: image.location,
+        userId: id,
+      });
       const result: ResponseBody = {
         httpStatus: HttpStatusCode.OK,
         status: 'successful',
@@ -36,7 +46,7 @@ export const TrackServices = {
       };
       return result;
     } catch (e) {
-      logger.error('Error in getAllTracks Service', { meta: e });
+      logger.error('Error in addTrack Service', { meta: e });
       const result: ResponseBody = {
         httpStatus: HttpStatusCode.BAD_REQUEST,
         status: 'failed',

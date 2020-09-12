@@ -71,7 +71,7 @@ class UserController implements IControllerBase {
   logout = (req: Request, res: Response, next: NextFunction) => {
     req.logout();
     req.session.destroy(e => {
-      console.log('%c [JL] e - e', 'font-size: 16px; color:  red;', e);
+      logger.info('Session destroyed');
     });
   };
 

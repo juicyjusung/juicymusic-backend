@@ -14,15 +14,15 @@ export function TrackFactory(sequelize: Sequelize): TrackStatic {
         allowNull: false,
       },
       album: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: true,
       },
-      albumArt: {
-        type: DataTypes.STRING(100),
+      albumArtPath: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
       filePath: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: true,
       },
     },

@@ -25,9 +25,11 @@ export interface TrackAttributes {
   artist: string;
   album: string;
   albumArt?: string;
+  albumArtPath?: string;
   filePath: string;
   createdAt?: Date;
   updatedAt?: Date;
+  userId: number;
 }
 
 export interface TrackModel extends Model<TrackAttributes>, TrackAttributes {}
