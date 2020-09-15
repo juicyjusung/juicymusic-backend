@@ -73,6 +73,7 @@ class UserController implements IControllerBase {
     req.session.destroy(e => {
       logger.info('Session destroyed');
     });
+    res.status(constants.HTTP_STATUS_OK).send('로그아웃 완료');
   };
 
   updateUser = async (req: Request, res: Response, next: NextFunction) => {
