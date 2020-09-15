@@ -8,6 +8,7 @@
     "dev": "NODE_ENV=development nodemon src/server.ts",
     "debug": "NODE_ENV=development nodemon --inspect src/server.ts",
     "start": "NODE_ENV=production node ./dist/server.js",
+    "pm2": "NODE_ENV=production pm2-runtime start ./dist/server.js --name \"juicymusic-back\"",
     "build": "tsc -p ."
   },
   "keywords": [],
@@ -28,6 +29,7 @@
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "pm2": "^4.4.1",
     "pug": "^3.0.0",
     "sequelize": "^6.3.5",
     "winston": "^3.3.3"
