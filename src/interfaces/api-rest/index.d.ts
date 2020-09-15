@@ -21,6 +21,7 @@ export type UserStatic = typeof Model & {
  *  Track
  **************/
 export interface TrackAttributes {
+  id?: number;
   title: string;
   artist: string;
   album: string;

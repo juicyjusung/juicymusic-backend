@@ -22,6 +22,8 @@ class TrackController implements IControllerBase {
     this.router.use(AuthMiddleware.isAuthenticated);
     this.router.get('/tracks', this.getAllTracks);
     this.router.post(`${this.path}`, upload.any(), this.addTrack);
+    this.router.put(`${this.path}/file`, upload.any(), this.updateTrackFile);
+    this.router.put(`${this.path}`, this.updateTrackInfo);
   }
 
   getAllTracks = async (req: Request, res: Response) => {
@@ -37,6 +39,7 @@ class TrackController implements IControllerBase {
       });
     }
   };
+
   addTrack = async (req: any, res: Response) => {
     const track: TrackAttributes = req.body;
     const { files } = req;
@@ -52,6 +55,52 @@ class TrackController implements IControllerBase {
     }
     try {
       const response = await TrackServices.addTrack(track, file, image, req.user.id);
+      return res.status(response.httpStatus).send(response);
+    } catch (e) {
+      logger.error('Error in addTrack Controller', { meta: e });
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send({
+        httpStatus: HttpStatusCode.INTERNAL_SERVER_ERROR,
+        status: 'failed',
+        errorDetails: e,
+      });
+    }
+  };
+
+  updateTrackFile = async (req: any, res: Response) => {
+    const track = req.body;
+    console.log(
+      '%c [JL] updateTrackFile - req.body',
+      'font-size: 16px; color:  red;',
+      req.body
+    );
+    const { files } = req;
+    const file = files.find(file => file.fieldname === 'file');
+    const image = files.find(file => file.fieldname === 'image');
+    if (!req.files) {
+      const response: ResponseBody = {
+        httpStatus: HttpStatusCode.OK,
+        status: 'successful',
+        message: '파일 업로드에 문제가 발생했습니다. 다시 시도해주세요',
+      };
+      return res.status(response.httpStatus).send(response);
+    }
+    try {
+      const response = await TrackServices.updateTrackFile(track, file, image);
+      return res.status(response.httpStatus).send(response);
+    } catch (e) {
+      logger.error('Error in addTrack Controller', { meta: e });
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send({
+        httpStatus: HttpStatusCode.INTERNAL_SERVER_ERROR,
+        status: 'failed',
+        errorDetails: e,
+      });
+    }
+  };
+
+  updateTrackInfo = async (req: any, res: Response) => {
+    const track: TrackAttributes = req.body;
+    try {
+      const response = await TrackServices.updateTrackInfo(track);
       return res.status(response.httpStatus).send(response);
     } catch (e) {
       logger.error('Error in addTrack Controller', { meta: e });
